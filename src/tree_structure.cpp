@@ -7,10 +7,10 @@ TreeStructure GetTreeStructure(const std::string& input_file) {
     std::string month;
     std::string year;
     std::smatch match;
-    fs::file_time_type ftime = fs::last_write_time(fs::path(input_file));
+    fs::file_time_type f_last_write = fs::last_write_time(fs::path(input_file));
     std::string filename = GetFileName(input_file);
     if (!std::regex_search(filename, match, std::regex("[21]\\d{3}([-_])?[01]\\d([-_])?[0-3]\\d"))) {
-        auto sctp = std::chrono::time_point_cast<std::chrono::system_clock::duration>(ftime - fs::file_time_type::clock::now() + std::chrono::system_clock::now());
+        auto sctp = std::chrono::time_point_cast<std::chrono::system_clock::duration>(f_last_write - fs::file_time_type::clock::now() + std::chrono::system_clock::now());
         std::time_t cftime = std::chrono::system_clock::to_time_t(sctp);
         std::tm* tm = std::localtime(&cftime);
         year = std::to_string(1900 + tm->tm_year);

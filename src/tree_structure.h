@@ -1,5 +1,8 @@
+#pragma once
+
 #include "stdafx.h"
 #include <regex>
+#include <chrono>
 
 // Defines the month and year structure
 // of the tree
